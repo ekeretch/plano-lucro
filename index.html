@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano&Lucro - Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+        }
+        header {
+            background-color: #4169e1;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .container.active {
+            display: block;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 2rem;
+        }
+        h2 {
+            color: #4169e1;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #40e0d0;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #30c7b8;
+        }
+        .thank-you {
+            text-align: center;
+            padding: 50px 20px;
+        }
+    </style>
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.container');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function goToPayment(event) {
+            event.preventDefault();
+            showPage('payment-page');
+        }
+
+        function completePurchase(event) {
+            event.preventDefault();
+            showPage('thank-you-page');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Plano&Lucro</h1>
+        <p>Evento em 9 de Setembro de 2025 - Alamos, Mafra SC</p>
+    </header>
+
+    <!-- Checkout Page -->
+    <div id="checkout-page" class="container active">
+        <h2>Checkout</h2>
+        <form onsubmit="goToPayment(event)">
+            <label for="quantity">Quantidade de ingressos:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+
+            <label>Total: R$60,00 por ingresso</label>
+
+            <button type="submit">Ir para o Pagamento</button>
+        </form>
+    </div>
+
+    <!-- Payment Page -->
+    <div id="payment-page" class="container">
+        <h2>Pagamento</h2>
+        <form onsubmit="completePurchase(event)">
+            <label for="payment-method">Forma de pagamento:</label>
+            <select id="payment-method" name="payment-method" required>
+                <option value="credit-card">Cartão de Crédito</option>
+                <option value="pix">PIX</option>
+                <option value="boleto">Boleto Bancário</option>
+            </select>
+
+            <button type="submit">Finalizar Compra</button>
+        </form>
+    </div>
+
+    <!-- Thank You Page -->
+    <div id="thank-you-page" class="container">
+        <h2>Obrigado pela sua compra!</h2>
+        <p>Um email de confirmação foi enviado para você.</p>
+        <p>Nos vemos no evento!</p>
+    </div>
+</body>
+</html>
+
+
+
+
